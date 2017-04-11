@@ -37,7 +37,7 @@
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
-// A $( document ).ready() block.
+
 $( document ).ready(function() {
     $.getJSON("attractions.json",function(json){
         j = json.map(
@@ -47,6 +47,32 @@ $( document ).ready(function() {
             }
         )
     })
+    $( "#typesel" ).change(function() {
+        if ($('option:selected').text()=="attractions"){
+            console.log('load attractions.json')
+            $.getJSON("attractions.json",function(json){
+                j = json.map(
+                    (i) => {
+                        i['reviews'] = JSON.parse(i['reviews'])
+                        return i
+                    }
+                )
+            })
+        }
+        else{
+            console.log('load restaurant.json')
+            $.getJSON("restaurant.json",function(json){
+                j = json.map(
+                    (i) => {
+                        i['reviews'] = JSON.parse(i['reviews'])
+                        return i
+                    }
+                )
+            })
+        }
+        
+    });
+
     $('#submitbtn').click(function(){
         $('#result').empty()
         let input = $('#keyword').val()
