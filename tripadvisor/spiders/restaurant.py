@@ -3,14 +3,14 @@ import scrapy, json
 from bs4 import BeautifulSoup
 from tripadvisor.items import TripadvisorItem
 
-class AttractionsSpider(scrapy.Spider):
-    name = "Attractions"
-    allowed_domains = ["www.tripadvisor.com"]
-    start_urls = ['https://www.tripadvisor.com/Attractions-g294265-Activities-c57-Singapore.html/']
+class RestaurantSpider(scrapy.Spider):
+    name = "restaurant"
+    allowed_domains = ["www.tripadvisor.com.tw"]
+    start_urls = ['https://www.tripadvisor.com/Restaurants-g294265-Singapore.html']
 
     def parse(self, response):
         res = BeautifulSoup(response.body)
-        for i in res.select('div.photo_booking.non_generic a'):
+        for i in res.select('.property_title'):
             yield scrapy.Request('http://'+self.allowed_domains[0] + i['href'], self.parse_detail)
 
     def parse_detail(self, response):
