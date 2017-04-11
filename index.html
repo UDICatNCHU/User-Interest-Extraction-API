@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Websites</title>
+        <style>
+        body {
+        background-attachment: fixed;
+        background-position:left top;
+        background-size:cover;
+        background-color: #ccc;
+        }
+        </style>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body >
+        <div class="container">
+            <div style="max-height:700px;min-height:200px;height:300px;position:relative" >
+                <div style="bottom:0px;position:absolute;width:100%;text-align:center;">
+                    <div class="row" style=" ">
+                        <div class="col-sm-12">
+                            <input id="keyword" style="box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);font-size:15px;padding:13px 25px 15px 25px;background-color:rgba(225,225,225,0.5);border-radius:8px;max-width:300px;min-width:50px;width:30%" type="text">
+                            <select id="typesel" style="box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);position:inherit;left:-3px;font-size:15px;padding:13px 25px 15px 25px;background-color:rgba(225,225,225,0.5);border-radius:8px;max-width:300px;min-width:50px;width:10%">
+                                <option  value="http://api.udic.cs.nchu.edu.tw/api/kemApi/?keyword=" selected>attractions</option>
+                                <option  value="http://api.udic.cs.nchu.edu.tw/api/kcmApi/?keyword=">restaurant</option>
+                            </select>
+                            <button id="submitbtn"  style="box-shadow:4px 4px 3px rgba(20%,20%,20%,0.5);position:inherit;font-size:15px;left:-5px;padding:15px 25px 15px 25px;" class="btn btn-success">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="result">
+            </div>
+        </div>
+    </body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    $.getJSON("attractions.json",function(json){
+        j = json.map(
+            (i) => {
+                i['reviews'] = JSON.parse(i['reviews'])
+                return i
+            }
+        )
+    })
+    $('#submitbtn').click(function(){
+        $('#result').empty()
+        let input = $('#keyword').val()
+        j.forEach(x => {
+            if (x['location'].toUpperCase().includes(input.toUpperCase())){
+                let show = $.parseHTML("<div><h2>location:"+x['location']+"</h2><h4>address:"+x['address']+"</h4><h4>reviews:"+x['reviews'][0]+"</h4></div>")
+                $('#result').append(show)
+                console.log(show)
+            }
+        });
+    });
+});
+</script>
