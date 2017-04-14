@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import scrapy, json
+import scrapy, json, functools
 from bs4 import BeautifulSoup
 from tripadvisor.items import TripadvisorItem
 
@@ -16,7 +16,14 @@ class AttractionsSpider(scrapy.Spider):
     def parse_detail(self, response):
         res = BeautifulSoup(response.body)
         tripItem = TripadvisorItem()
-        tripItem['location'] = res.select('#HEADING')[0].text
-        tripItem['address'] = res.select('.format_address')[0].text
-        tripItem['reviews'] = json.dumps(list(map(lambda review:review.text, res.select('.partial_entry'))))
+        tripItem['title'] = res.select('#HEADING')[0].text
+        tripItem['location'] = res.select('.format_address')[0].text
+        tripItem['description'] = functools.reduce(lambda x,y:x+y, map(lambda review:review.text, res.select('.partial_entry')))
+        tripItem['category'] = "event"
+        tripItem['type'] = "attractions"
+        tripItem['channel'] = ""
+        tripItem['time'] = ""
+        tripItem['price'] = ""
+        tripItem['image'] = ""
+        tripItem['link'] = response.url
         return tripItem
