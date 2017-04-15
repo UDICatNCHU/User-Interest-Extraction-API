@@ -13,5 +13,5 @@ def api(request):
 	try:
 		result = json.load(open(event+'.json','r'))[:num]
 	except Exception as e:
-		result = ["invalid parameter"]
+		result = json.load(open(event+'.json','r'))['item'][:num]
 	return JsonResponse(result, safe=False)
