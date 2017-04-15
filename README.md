@@ -11,9 +11,9 @@
 
 ## API url:
 
-url : `140.120.13.243:7777/api`
+url : `140.120.13.243:12435/api`
 
-example : `140.120.13.243:7777/api/?event=tech&num=2`
+example : `140.120.13.243:12435/api/?event=tech&num=2`
 
 
 # Usage
