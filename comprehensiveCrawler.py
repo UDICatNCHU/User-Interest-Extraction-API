@@ -129,14 +129,11 @@ class moviesCrawler(object):
                 appendDict['location'] = ''
                 appendDict['price'] = ''
                 appendDict['image'] = div.select('img.poster.shadowed')[0]['src']
-                appendDict['description'] = div.select('div.outline')[0].text
+                string = div.select('div.outline')[0].text
+                appendDict['description'] = string[1:] # delete the first \n charactor
                 appendDict['link'] = self.baseUrl + div.select('h4 > a')[0]['href']
                 resultDict['item'].append(appendDict)
 
-                # print(div.select('img.poster.shadowed')[0]['src']) # 電影image
-                # print(self.baseUrl + div.select('h4 > a')[0]['href']) # 電影link
-                # print(div.select('h4 > a')[0].text) # 電影title
-                # print(div.select('div.outline')[0].text) # 電影description
         return resultDict
 
     def dumpToJson(self, resultDict):
