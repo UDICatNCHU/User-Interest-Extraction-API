@@ -13,7 +13,7 @@
 
 url : `140.120.13.243:12435/api`
 
-example : `140.120.13.243:12435/api/?event=TechNews&num=20`
+example : `140.120.13.243:12435/api/?event=SportsNews&num=20`
 
 
 # Usage
