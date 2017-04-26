@@ -55,7 +55,7 @@ class SportsCrawler(object):
         return returnStr
 
     def dumpToJson(self, resultDict):
-        with open('./result/SportsNews.json', 'w') as wf:
+        with open('./user_interest_api_server/SportsNews.json', 'w') as wf:
             json.dump(resultDict, wf)
 
     def exec(self):
@@ -95,7 +95,7 @@ class TechNewsCrawler(object):
         return resultDict
 
     def dumpToJson(self, resultDict):
-        with open('./result/TechNews.json', 'w') as wf:
+        with open('./user_interest_api_server/TechNews.json', 'w') as wf:
             json.dump(resultDict, wf)
 
     def exec(self):
@@ -137,7 +137,7 @@ class moviesCrawler(object):
         return resultDict
 
     def dumpToJson(self, resultDict):
-        with open('./result/Movies.json', 'w') as wf:
+        with open('./user_interest_api_server/Movies.json', 'w') as wf:
             json.dump(resultDict, wf)
 
     def exec(self):
