@@ -1,4 +1,9 @@
 result/
+nohup.out
+user_interest_api_server/Movies.json
+user_interest_api_server/SportsNews.json
+user_interest_api_server/TechNews.json
+user_interest_api_server/nohup.out
 
 # Project stuff
 entrance/settings_database.py

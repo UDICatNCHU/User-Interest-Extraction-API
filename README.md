@@ -4,9 +4,9 @@
 * event: these are available options
 	* `rest`
 	* `tourist`
-	* `movies`
-	* `tech`
-	* `sport`
+	* `Movies`
+	* `TechNews`
+	* `SportsNews`
 * num: please don't query num bigger than `20`, some type of event json didn't prepare for that much.
 
 ## API url:
