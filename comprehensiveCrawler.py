@@ -69,7 +69,7 @@ class SportsCrawler(object):
 
 class TechNewsCrawler(object):
     def __init__(self):
-        self.url = 'https://www.cnet.com/rss/news/'
+        self.url = 'https://www.cnet.com/rss/reviews/'
 
     def parseXmlToDict(self):
         resultDict = dict()
