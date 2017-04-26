@@ -157,4 +157,4 @@ if __name__ == '__main__':
     TechNewsObj.exec()
     moviesObj = moviesCrawler()
     moviesObj.exec()
-    # time.sleep(86400) # sleep for 24 hours
+    time.sleep(86400) # sleep for 24 hours
