@@ -30,7 +30,7 @@ class SportsCrawler(object):
         for item in tree_root[0].findall('item'):
             appendDict = collections.OrderedDict()
             appendDict['title'] = item.find('title').text
-            appendDict['category'] = 'news'
+            appendDict['category'] = 'event'
             appendDict['type'] = 'sports'
             appendDict['channel'] = 'ESPN'
             appendDict['time'] = item.find('pubDate').text
@@ -69,7 +69,7 @@ class SportsCrawler(object):
 
 class TechNewsCrawler(object):
     def __init__(self):
-        self.url = 'https://www.cnet.com/rss/reviews/'
+        self.url = 'https://www.cnet.com/rss/news/'
 
     def parseXmlToDict(self):
         resultDict = dict()
@@ -81,7 +81,7 @@ class TechNewsCrawler(object):
             # print(item.find('title').text)
             appendDict = collections.OrderedDict()
             appendDict['title'] = item.find('title').text
-            appendDict['category'] = 'news'
+            appendDict['category'] = 'event'
             appendDict['type'] = 'tech'
             appendDict['channel'] = 'CNET'
             appendDict['time'] = item.find('pubDate').text
@@ -127,7 +127,7 @@ class moviesCrawler(object):
                 appendDict['channel'] = 'IMDB'
                 appendDict['time'] = ''
                 appendDict['location'] = ''
-                appendDict['price'] = ''
+                appendDict['price'] = 0
                 appendDict['image'] = div.select('img.poster.shadowed')[0]['src']
                 string = div.select('div.outline')[0].text
                 appendDict['description'] = string[1:] # delete the first \n charactor
