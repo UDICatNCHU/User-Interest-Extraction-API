@@ -16,14 +16,14 @@ class AttractionsSpider(scrapy.Spider):
     def parse_detail(self, response):
         res = BeautifulSoup(response.body)
         tripItem = TripadvisorItem()
-        tripItem['title'] = res.select('#HEADING')[0].text
+        tripItem['title'] = res.select('#HEADING')[0].text.replace('\n', '')
         tripItem['location'] = res.select('.format_address')[0].text
-        tripItem['description'] = functools.reduce(lambda x,y:x+y, map(lambda review:review.text, res.select('.partial_entry')))
+        tripItem['description'] = functools.reduce(lambda x,y:x+y, map(lambda review:review.text, res.select('.partial_entry'))).replace('\n', '', 1).replace('More\xa0 \n', '')
         tripItem['category'] = "event"
         tripItem['type'] = "attractions"
         tripItem['channel'] = ""
         tripItem['time'] = ""
-        tripItem['price'] = ""
+        tripItem['price'] = 0
         tripItem['image'] = ""
         tripItem['link'] = response.url
         return tripItem
