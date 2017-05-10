@@ -50,7 +50,7 @@ class SportsCrawler(object):
         soup = BeautifulSoup(res.text, 'html.parser')
         returnStr = ''
         for item in soup.find_all('p')[0:4]:
-            returnStr += item.text
+            returnStr += (item.text + '\n')
 
         return returnStr
 
