@@ -30,7 +30,7 @@ class SportsCrawler(object):
         for item in tree_root[0].findall('item'):
             appendDict = collections.OrderedDict()
             appendDict['title'] = item.find('title').text
-            appendDict['category'] = 'event'
+            appendDict['category'] = 'news'
             appendDict['type'] = 'sports'
             appendDict['channel'] = 'ESPN'
             appendDict['time'] = item.find('pubDate').text
@@ -39,7 +39,9 @@ class SportsCrawler(object):
             appendDict['image'] = ''
             
             link = item.find('link').text
-            appendDict['description'] = self.getDescriptions(link)
+            des = self.getDescriptions(link)
+            if len(des) < 100: continue
+            appendDict['description'] = des
             appendDict['link'] = link
             resultDict['item'].append(appendDict)
         # pprint.pprint(self.resultDict)
@@ -49,7 +51,7 @@ class SportsCrawler(object):
         res = requests.get(link)
         soup = BeautifulSoup(res.text, 'html.parser')
         returnStr = ''
-        for item in soup.find_all('p')[0:4]:
+        for item in soup.find_all('p'):
             returnStr += (item.text + '\n')
 
         return returnStr
@@ -81,18 +83,30 @@ class TechNewsCrawler(object):
             # print(item.find('title').text)
             appendDict = collections.OrderedDict()
             appendDict['title'] = item.find('title').text
-            appendDict['category'] = 'event'
+            appendDict['category'] = 'news'
             appendDict['type'] = 'tech'
             appendDict['channel'] = 'CNET'
             appendDict['time'] = item.find('pubDate').text
             appendDict['location'] = ''
             appendDict['price'] = 0
             appendDict['image'] = ''
-            appendDict['description'] = item.find('description').text
-            appendDict['link'] = item.find('link').text
+            link = item.find('link').text
+            des = self.getDescriptions(link)
+            if len(des) < 100: continue
+            appendDict['description'] = des
+            appendDict['link'] = link
             resultDict['item'].append(appendDict)
         # pprint.pprint(self.resultDict)
         return resultDict
+
+    def getDescriptions(self, link):
+        res = requests.get(link)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        returnStr = ''
+        for item in soup.find_all('p'):
+            returnStr += (item.text + '\n')
+
+        return returnStr
 
     def dumpToJson(self, resultDict):
         with open('./user_interest_api_server/TechNews.json', 'w') as wf:
