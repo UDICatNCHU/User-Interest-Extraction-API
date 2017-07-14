@@ -18,7 +18,9 @@ example : `140.120.13.243:12435/api/?event=SportsNews&num=20`
 When you start to look up those data.  
 you need to run scrapy command first to get those json file.
 
-`scrapy crawl Attractions -o attractions.json -t json`: This command will download data from Attractions of tripadvisor.
-`scrapy crawl restaurant -o restaurant.json -t json`: same as beyond.
-
-`comprehensiveCrawler.py` is a web crawler which can get the information from __ESPN__, __CNET__ and __IMDB__, and organize them into JSON files for sports news, tech news and movie inforamtion respectively. The JSON files will be created in __./result/__.
+* scrapy:
+	* `scrapy crawl Attractions -o attractions.json -t json` from tripadvisor
+	* `scrapy crawl restaurant -o restaurant.json -t json` from tripadvisor
+	* `scrapy crawl ithome -o ithome.json -t json` from ithome
+* seperate crawlers:
+	* `comprehensiveCrawler.py` is a web crawler which can get the information from __ESPN__, __CNET__ and __IMDB__, and organize them into JSON files for sports news, tech news and movie inforamtion respectively. The JSON files will be created in __./result/__.
