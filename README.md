@@ -7,6 +7,9 @@
 	* `Movies`
 	* `TechNews`
 	* `SportsNews`
+	* `ithome`
+	* `taiwan_attractions`
+	* `taiwan_restaurant`
 * `num`: please don't query num bigger than `20`, some type of event json didn't prepare for that much.
 
 ## API url:
