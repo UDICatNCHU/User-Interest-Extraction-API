@@ -29,5 +29,7 @@ you need to run scrapy command first to get those json file.
 	* `scrapy crawl taiwan_attractions -o taiwan_attractions.json -t json` from taiwan tripadvisor
 	* `scrapy crawl taiwan_restaurant -o taiwan_restaurant.json -t json` from taiwan restaurant
 	* `scrapy crawl ithome -o ithome.json -t json` from ithome
+	* `scrapy crawl yahoosport -o yahoosport.json -t json` from sport board of yahoo
+	* `scrapy crawl yahoomovie -o yahoomovie.json -t json` from movie board of yahoo
 * seperate crawlers:
 	* `comprehensiveCrawler.py` is a web crawler which can get the information from __ESPN__, __CNET__ and __IMDB__, and organize them into JSON files for sports news, tech news and movie inforamtion respectively. The JSON files will be created in __./result/__.
