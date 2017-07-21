@@ -11,7 +11,7 @@ def api(request):
 	event = request.GET['event']
 	num = int(request.GET['num'])
 	try:
-		result = json.load(open(event+'.json','r'))[:num]
+		result = sorted(json.load(open(event+'.json','r'))[:num], key=lambda x:x['time'], reverse=True)
 	except Exception as e:
 		result = json.load(open(event+'.json','r'))['item'][:num]
 	return JsonResponse(result, safe=False)
