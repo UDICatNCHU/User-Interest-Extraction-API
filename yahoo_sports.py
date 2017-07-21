@@ -56,7 +56,7 @@ def main():
 			else:
 				continue
 
-		json.dump(jsonArray, open('yahoosport.json', 'w'))
+		json.dump(jsonArray, open('user_interest_api_server/yahoosport.json', 'w'))
 		time.sleep(1800)
 
 if __name__ == '__main__':
