@@ -15,4 +15,13 @@ while True:
 	with open('../user_interest_api_server/art.json', 'w') as f:
 		json.dump(sorted([i for i in file if '展期' not in i['time']], key=lambda x:x['time'], reverse=True), f)
 
+	subprocess.call(['rm', '../user_interest_api_server/politics.json'])
+	subprocess.call(['scrapy' ,'crawl' ,'politics' ,'-o' ,'../user_interest_api_server/politics.json' ,'-t' ,'json'])
+	with open('../user_interest_api_server/politics.json', 'r') as f:
+		file = json.load(f)
+	with open('../user_interest_api_server/politics.json', 'w') as f:
+		json.dump(sorted(file, key=lambda x:x['time'], reverse=True), f)
+	
 	time.sleep(3000)
+
+
