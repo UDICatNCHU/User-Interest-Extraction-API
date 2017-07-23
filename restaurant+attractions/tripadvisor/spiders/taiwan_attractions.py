@@ -2,16 +2,19 @@
 import scrapy, functools
 from bs4 import BeautifulSoup
 from tripadvisor.items import TripadvisorItem
-
+from selenium import webdriver
 
 class TaiwanRestaurantSpider(scrapy.Spider):
     name = "taiwan_attractions"
     allowed_domains = ["www.tripadvisor.com.tw"]
-    start_urls = ['https://www.tripadvisor.com.tw/Restaurants-g293913-Taipei.html']
+    start_urls = ['https://www.tripadvisor.com.tw/Attractions-g293913-Activities-Taipei.html']
+    driver = webdriver.PhantomJS(executable_path='./phantomjs')
+
 
     def parse(self, response):
-        res = BeautifulSoup(response.body)
-        for i in res.select('.attractions li'):
+        self.driver.get(response.url)
+        res = BeautifulSoup(self.driver.page_source)
+        for i in res.select('.attraction_element'):
             yield scrapy.Request('http://'+self.allowed_domains[0] + i.select('a')[0]['href'], self.parse_detail)
 
     def parse_detail(self, response):
