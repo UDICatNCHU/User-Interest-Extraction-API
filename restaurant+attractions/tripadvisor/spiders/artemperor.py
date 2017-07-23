@@ -7,18 +7,19 @@ from tripadvisor.items import TripadvisorItem
 class ArtemperorSpider(scrapy.Spider):
     name = "artemperor"
     allowed_domains = ["artemperor.tw"]
-    start_urls = ['http://artemperor.tw/', 'http://artemperor.tw/news?page=2']
+    start_urls = ['http://artemperor.tw/tidbits', 'http://artemperor.tw/tidbits?page=2', 'http://artemperor.tw/tidbits?page=3', 'http://artemperor.tw/tidbits?page=4', 'http://artemperor.tw/tidbits?page=5', 'http://artemperor.tw/tidbits?page=6']
 
     def parse(self, response):
         soup = BeautifulSoup(response.body)
-        for i in soup.select('li.news_block'):
-            yield scrapy.Request(i.select('a')[0]['href'], self.parse_detail, meta={'img':i.select('img')[0]['src'], 'title':i.select('img')[0]['alt'], 'time':i.select('i')[0].text})
+        for i in soup.select('li.exhibit_block'):
+            if '台北' in i.text:
+                yield scrapy.Request(i.select('a')[0]['href'], self.parse_detail, meta={'img':i.select('img')[0]['src'], 'title':i.select('img')[0]['alt'], 'time':[i.text for i in i.select('p') if '日期' in i.text][0]})
 
     def parse_detail(self, response):
         res = BeautifulSoup(response.body)
         tripItem = TripadvisorItem()
         tripItem['title'] = response.meta['title']
-        tripItem['location'] = ""
+        tripItem['location'] = [i.text for i in res.select('li') if '地點' in i.text][0]
         tripItem['description'] = res.select('.content p')[0].text
         tripItem['category'] = "event"
         tripItem['type'] = "artemperor"
