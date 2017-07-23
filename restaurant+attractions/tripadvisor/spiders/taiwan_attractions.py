@@ -7,7 +7,7 @@ from tripadvisor.items import TripadvisorItem
 class TaiwanRestaurantSpider(scrapy.Spider):
     name = "taiwan_attractions"
     allowed_domains = ["www.tripadvisor.com.tw"]
-    start_urls = ['https://www.tripadvisor.com.tw/Tourism-g293913-Taipei-Vacations.html', 'https://www.tripadvisor.com.tw/Tourism-g297910-Taichung-Vacations.html', 'https://www.tripadvisor.com.tw/Tourism-g1432365-Xinbei-Vacations.html', 'https://www.tripadvisor.com.tw/Tourism-g297908-Kaohsiung-Vacations.html', 'https://www.tripadvisor.com.tw/Tourism-g293912-Tainan-Vacations.html', 'https://www.tripadvisor.com.tw/Tourism-g297907-Hualien_County-Vacations.html', 'https://www.tripadvisor.com.tw/Tourism-g297909-Pingtung_County-Vacations.html', 'https://www.tripadvisor.com.tw/Tourism-g304163-Taitung_County-Vacations.html', 'https://www.tripadvisor.com.tw/Tourism-g304160-Nantou_County-Vacations.html']
+    start_urls = ['https://www.tripadvisor.com.tw/Restaurants-g293913-Taipei.html']
 
     def parse(self, response):
         res = BeautifulSoup(response.body)

@@ -8,6 +8,13 @@ while True:
 	with open('../user_interest_api_server/yahoomovie.json', 'w') as f:
 		json.dump(sorted(file, key=lambda x:x['time'], reverse=True), f) 
 
+	subprocess.call(['rm', '../user_interest_api_server/ithome.json'])
+	subprocess.call(['scrapy' ,'crawl' ,'ithome' ,'-o' ,'../user_interest_api_server/ithome.json' ,'-t' ,'json'])
+	with open('../user_interest_api_server/ithome.json', 'r') as f:
+		file = json.load(f)
+	with open('../user_interest_api_server/ithome.json', 'w') as f:
+		json.dump(sorted(file, key=lambda x:x['time'], reverse=True), f) 
+
 	subprocess.call(['rm', '../user_interest_api_server/art.json'])
 	subprocess.call(['scrapy' ,'crawl' ,'artemperor' ,'-o' ,'../user_interest_api_server/art.json' ,'-t' ,'json'])
 	with open('../user_interest_api_server/art.json', 'r') as f:
