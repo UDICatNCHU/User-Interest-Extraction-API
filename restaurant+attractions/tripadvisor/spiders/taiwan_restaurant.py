@@ -7,7 +7,7 @@ from selenium import webdriver
 class TaiwanRestaurantSpider(scrapy.Spider):
     name = "taiwan_restaurant"
     allowed_domains = ["www.tripadvisor.com.tw"]
-    start_urls = ['https://www.tripadvisor.com.tw/Restaurants-g293913-Taipei.html']
+    start_urls = ['https://www.tripadvisor.com.tw/Restaurants-g297906-Hsinchu.html']
     driver = webdriver.PhantomJS(executable_path='./phantomjs')
      
 

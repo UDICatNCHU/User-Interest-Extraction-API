@@ -12,7 +12,7 @@ class ArtemperorSpider(scrapy.Spider):
     def parse(self, response):
         soup = BeautifulSoup(response.body)
         for i in soup.select('li.exhibit_block'):
-            if '台北' in i.text:
+            if '新竹' in i.text:
                 yield scrapy.Request(i.select('a')[0]['href'], self.parse_detail, meta={'img':i.select('img')[0]['src'], 'title':i.select('img')[0]['alt'], 'time':[i.text for i in i.select('p') if '日期' in i.text][0]})
 
     def parse_detail(self, response):
