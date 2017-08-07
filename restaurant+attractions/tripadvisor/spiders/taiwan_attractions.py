@@ -21,7 +21,7 @@ class TaiwanRestaurantSpider(scrapy.Spider):
         res = BeautifulSoup(response.body)
         tripItem = TripadvisorItem()
         tripItem['title'] = res.select('#HEADING')[0].text.replace('\n', '')
-        tripItem['location'] = res.select('.colCnt2')[0].text
+        tripItem['location'] = res.select('.colCnt2')[0].text if len(res.select('.colCnt2')) else ''
         tripItem['description'] = functools.reduce(lambda x,y:x+'\n'+y, map(lambda review:review.text, res.select('.partial_entry'))).replace('\n', '', 1).replace('More\xa0 \n', '')
         tripItem['category'] = "event"
         tripItem['type'] = "attrations"

@@ -7,7 +7,7 @@ from tripadvisor.items import TripadvisorItem
 class ArtemperorSpider(scrapy.Spider):
     name = "artemperor"
     allowed_domains = ["artemperor.tw"]
-    start_urls = ['http://artemperor.tw/tidbits', 'http://artemperor.tw/tidbits?page=2', 'http://artemperor.tw/tidbits?page=3', 'http://artemperor.tw/tidbits?page=4', 'http://artemperor.tw/tidbits?page=5', 'http://artemperor.tw/tidbits?page=6']
+    start_urls = ['http://artemperor.tw/tidbits'] + ['http://artemperor.tw/tidbits?page={}'.format(str(i)) for i in range(422)]
 
     def parse(self, response):
         soup = BeautifulSoup(response.body)

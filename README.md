@@ -33,7 +33,7 @@ you need to run scrapy command first to get those json file.
 	* `scrapy crawl ithome -o ithome.json -t json` from ithome
 	* `scrapy crawl yahoomovie -o yahoomovie.json -t json` from movie board of yahoo
 		* use `python scrapy_background.py` to activate
-	* `scrapy crawl art -o art.json -t json` from movie board of yahoo
+	* `scrapy crawl artemperor -o art.json -t json` from movie board of yahoo
 		* use `python scrapy_background.py` to activate
 	* `scrapy crawl politics -o politics.json -t json` from movie board of yahoo
 		* use `python scrapy_background.py` to activate
