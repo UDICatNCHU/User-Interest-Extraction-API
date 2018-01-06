@@ -20,5 +20,5 @@ from user_interest_api_server import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', views.api),
-    url(r'^momoapi/', views.api)
+    url(r'^momoapi/', views.momoapi)
 ]

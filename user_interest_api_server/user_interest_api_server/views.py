@@ -23,7 +23,7 @@ def momoapi(request):
     Returns:
         if contains invalid queryString key, it will raise exception.
     """
-    portion = request.GET['portion']
+    portion = json.loads(request.GET['portion'])
     num = int(request.GET['num'])
 
     data = json.load(open('momo_data.json','r'))
@@ -32,17 +32,18 @@ def momoapi(request):
                         ,'girlshoes','pregnant','appliances','camping','bag','book','video','stationery','religion','anime']
     portion_num = 0
     for n in portion:
-        portion_num += n
-    
+        portion_num += int(n)
     x = 0
     result = []
     
     for category in categoryArray:
-        sample = int(num * (portion[x] / portion_num))
+        sample = int(num * (portion[x] / portion_num) + 0.5)
+        if sample > 5 : sample = 5
         sampleArray = random.sample(data[category], sample)
+        
+        for ele in sampleArray:
+            result.append(ele)
+        
         x += 1
-
-    for ele in sampleArray:
-        result.append(ele)
-
+    
     return JsonResponse(result, safe=False)
