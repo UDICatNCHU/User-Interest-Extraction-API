@@ -1,5 +1,4 @@
-# API
-
+# User-Interest-Extraction-API
 ## parameter:
 * event: these are available options
 	* `rest`
@@ -40,3 +39,34 @@ you need to run scrapy command first to get those json file.
 * seperate crawlers:
 	* `comprehensiveCrawler.py` is a web crawler which can get the information from __ESPN__, __CNET__ and __IMDB__, and organize them into JSON files for sports news, tech news and movie inforamtion respectively. The JSON files will be created in __./result/__.
 	* `python yahoo_sport.py` from sport board of yahoo
+
+# Momo-Product-API
+## parameter:
+* proportion: the proportion of 20 product categories. 
+	      the categories sequence is shown below.
+	* `tissue`
+	* `notebook`
+	* `lodging`
+	* `fragrance`
+	* `sportswear`
+	* `makeup`
+	* `health`
+	* `organicfood`
+	* `watch`
+	* `underwear`
+	* `girlshoes`
+	* `pregnant`
+	* `appliances`
+	* `camping`
+	* `bag`
+	* `book`
+	* `video`
+	* `stationery`
+	* `religion`
+	* `anime`
+* `num`: the number of displays.
+         please don't input num bigger than `200`.
+	 currently there are only 10 data in each category.
+	 
+## API url:
+example : `http://127.0.0.1:8000/momoapi/?proportion=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]&num=100`
