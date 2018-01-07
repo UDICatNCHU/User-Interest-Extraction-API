@@ -43,7 +43,7 @@ you need to run scrapy command first to get those json file.
 # Momo-Product-API
 ## parameter:
 * proportion: the proportion of 20 product categories. 
-	      the categories sequence is shown below.
+	the categories sequence is shown below.
 	* `tissue`
 	* `notebook`
 	* `lodging`
