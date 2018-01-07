@@ -38,7 +38,7 @@ def momoapi(request):
     
     for category in categoryArray:
         sample = int(num * (portion[x] / portion_num) + 0.5)
-        if sample > 5 : sample = 5
+        if sample > 10 : sample = 10
         sampleArray = random.sample(data[category], sample)
         
         for ele in sampleArray:
