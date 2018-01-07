@@ -42,8 +42,8 @@ you need to run scrapy command first to get those json file.
 
 # Momo-Product-API
 ## parameter:
-* proportion: the proportion of 20 product categories. 
-	the categories sequence is shown below.
+* `proportion`: the proportion of 20 product categories. 
+* the categories sequence is shown below.
 	* `tissue`
 	* `notebook`
 	* `lodging`
@@ -65,8 +65,8 @@ you need to run scrapy command first to get those json file.
 	* `religion`
 	* `anime`
 * `num`: the number of displays.
-         please don't input num bigger than `200`.
-	 currently there are only 10 data in each category.
+* please don't input num bigger than `200`.
+* currently there are only 10 data in each category.
 	 
 ## API url:
 example : `http://127.0.0.1:8000/momoapi/?proportion=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]&num=100`
