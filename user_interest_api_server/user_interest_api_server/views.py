@@ -17,27 +17,27 @@ def api(request):
 	return JsonResponse(result, safe=False)
 
 
-@queryString_required(['portion', 'num'])
+@queryString_required(['proportion', 'num'])
 def momoapi(request):
     """Generate list of term data source files
     Returns:
         if contains invalid queryString key, it will raise exception.
     """
-    portion = json.loads(request.GET['portion'])
+    proportion = json.loads(request.GET['proportion'])
     num = int(request.GET['num'])
 
     data = json.load(open('momo_data.json','r'))
 
     categoryArray = ['tissue','notebook','lodging','fragrance','sportswear','makeup','health','organicfood','watch','underwear'
                         ,'girlshoes','pregnant','appliances','camping','bag','book','video','stationery','religion','anime']
-    portion_num = 0
-    for n in portion:
-        portion_num += int(n)
+    proportion_num = 0
+    for n in proportion:
+        proportion_num += int(n)
     x = 0
     result = []
     
     for category in categoryArray:
-        sample = int(num * (portion[x] / portion_num) + 0.5)
+        sample = int(num * (proportion[x] / proportion_num) + 0.5)
         if sample > 10 : sample = 10
         sampleArray = random.sample(data[category], sample)
         
