@@ -1,6 +1,6 @@
 from django.http import JsonResponse, Http404
 from djangoApiDec.djangoApiDec import queryString_required, date_proc
-import json, re, os
+import json, re, os, random
 
 @queryString_required(['event', 'num'])
 def api(request):
@@ -15,3 +15,35 @@ def api(request):
 	except Exception as e:
 		result = json.load(open(event+'.json','r'))['item'][:num]
 	return JsonResponse(result, safe=False)
+
+
+@queryString_required(['proportion', 'num'])
+def momoapi(request):
+    """Generate list of term data source files
+    Returns:
+        if contains invalid queryString key, it will raise exception.
+    """
+    proportion = json.loads(request.GET['proportion'])
+    num = int(request.GET['num'])
+
+    data = json.load(open('momo_data.json','r'))
+
+    categoryArray = ['tissue','notebook','lodging','fragrance','sportswear','makeup','health','organicfood','watch','underwear'
+                        ,'girlshoes','pregnant','appliances','camping','bag','book','video','stationery','religion','anime']
+    proportion_num = 0
+    for n in proportion:
+        proportion_num += int(n)
+    x = 0
+    result = []
+    
+    for category in categoryArray:
+        sample = int(num * (proportion[x] / proportion_num) + 0.5)
+        if sample > 10 : sample = 10
+        sampleArray = random.sample(data[category], sample)
+        
+        for ele in sampleArray:
+            result.append(ele)
+        
+        x += 1
+    
+    return JsonResponse(result, safe=False)
