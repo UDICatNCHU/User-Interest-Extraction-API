@@ -16,6 +16,7 @@ class TaiwanRestaurantSpider(scrapy.Spider):
         res = BeautifulSoup(self.driver.page_source)
         for i in res.select('div.listing.rebrand'):
             yield scrapy.Request('http://'+self.allowed_domains[0] + i.select('a')[0]['href'], self.parse_detail)
+        self.driver.close()
 
     def parse_detail(self, response):
         res = BeautifulSoup(response.body)
