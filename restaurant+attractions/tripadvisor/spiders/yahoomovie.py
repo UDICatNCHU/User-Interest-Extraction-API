@@ -2,33 +2,25 @@
 import scrapy, json, functools
 from bs4 import BeautifulSoup
 from tripadvisor.items import TripadvisorItem
-from selenium import webdriver
 
 class YahoomovieSpider(scrapy.Spider):
     name = "yahoomovie"
     allowed_domains = ["movies.yahoo.com.tw"]
     start_urls = ['https://movies.yahoo.com.tw/chart.html']
-    driver = webdriver.PhantomJS(executable_path='./phantomjs')
-
+    
     def parse(self, response):
         soup = BeautifulSoup(response.body)
-        num = 0
+        num = 1
         for i in soup.select('div.tr')[1:]:
             try:                                #判斷是否有網址
                 yield scrapy.Request(i.select('a')[0]['href'], self.parse_detail)
             except:
+                yield scrapy.Request(soup.select('div.tr')[num].select('a')[0]['href'], self.parse_detail)
                 num += 1
-        
-        for i in soup.select('div.tr')[1:]:
-            num -= 1
-            if num >= 0:
-                try:
-                    yield scrapy.Request(i.select('a')[0]['href'], self.parse_detail)
-                except:
-                    num += 1
-            else:
-                break
-
+                print(num)
+            
+                    
+       
     def parse_detail(self, response):       
         res = BeautifulSoup(response.body)
         tripItem = TripadvisorItem()
