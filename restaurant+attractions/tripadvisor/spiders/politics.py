@@ -10,7 +10,7 @@ class PoliticsSpider(scrapy.Spider):
     def parse(self, response):
         soup = BeautifulSoup(response.body)  
         jsonArray = []
-        for news in soup.select('.tit'):
+        for news in soup.select('.imm li a.tit'):
             yield scrapy.Request(news['href'], self.parse_detail)
            
     def parse_detail(self, response):
@@ -23,14 +23,20 @@ class PoliticsSpider(scrapy.Spider):
         for text in res.select('.text p'):
             if not(text.find_previous_sibling().select('img')):
                 description = description + text.text
+
         tripItem['description'] = description
         tripItem['category'] = "event"
         tripItem['type'] = "politics"
         tripItem['channel'] = ""
         tripItem['time'] = res.select('.text.text span')[0].text
         tripItem['price'] = 0
-        if res.select('.boxInput'):
-            image = res.select('.boxInput')[0]['src']
+        if res.select('img.boxInput'):
+            try:
+                image = res.select('img.boxInput')[0]['src']
+            except Exception as e:
+                print('==============')
+                print(res.select('img.boxInput'))
+                print('==============')
         else:
             image = res.select('.pic750 img')[0]['src']
         tripItem['image'] = image
