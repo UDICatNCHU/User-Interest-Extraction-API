@@ -20,7 +20,16 @@ example : `140.120.13.243:12435/api/?event=SportsNews&num=20`
 
 
 # Usage
-`index.html` provide a web service by loading json  
+* run django
+	* . venv/bin/activate
+	* cd user_interest_api_server/
+	* nohup python3 manage.py runserver 0.0.0.0:8000 &
+* run crawl
+	* nohup python3 manage.py scrapy_background.py &
+	* nohup python3 yahoo_sport.py &
+	* nohup python3 comprehensiveCrawler.py &
+	
+`index.html` provide a web service by loading json  
 When you start to look up those data.  
 you need to run scrapy command first to get those json file.
 
@@ -39,7 +48,6 @@ you need to run scrapy command first to get those json file.
 * seperate crawlers:
 	* `comprehensiveCrawler.py` is a web crawler which can get the information from __ESPN__, __CNET__ and __IMDB__, and organize them into JSON files for sports news, tech news and movie inforamtion respectively. The JSON files will be created in __./result/__.
 	* `python yahoo_sport.py` from sport board of yahoo
-
 # Momo-Product-API
 ## parameter:
 * `proportion`: the proportion of 20 product categories. 
