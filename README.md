@@ -20,11 +20,11 @@ example : `140.120.13.243:12435/api/?event=SportsNews&num=20`
 
 
 # Usage
-* run django
+* run Django
 	* . venv/bin/activate
 	* cd user_interest_api_server/
 	* nohup python3 manage.py runserver 0.0.0.0:8000 &
-* run crawl
+* run Crawler
 	* nohup python3 manage.py scrapy_background.py &
 	* nohup python3 yahoo_sport.py &
 	* nohup python3 comprehensiveCrawler.py &
